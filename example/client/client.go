@@ -19,6 +19,15 @@ type UserLoginResp struct {
 	Status string `json:"status"`
 }
 
+type Logout struct{}
+
+type UserRegister struct {
+	Name     string `param:"name;pos:query"`
+	Password string `param:"password"`
+}
+type UserRegisterResp struct {
+}
+
 func init() {
 	bundle.Client(shu.Client{
 		Name: "auth",
@@ -30,8 +39,27 @@ func init() {
 				Params:   UserLogin{},
 				Response: UserLoginResp{},
 			},
+			{
+				Name:     "logout",
+				Path:     "/api/v1/logout",
+				Method:   shu.POST,
+				Params:   Logout{},
+				Response: UserLoginResp{},
+			},
 		},
 	},
+		shu.Client{
+			Name: "user",
+			APIs: []*shu.API{
+				{
+					Name:     "register",
+					Path:     "/api/v1/register",
+					Method:   shu.POST,
+					Params:   UserRegister{},
+					Response: UserRegisterResp{},
+				},
+			},
+		},
 	)
 	bundle.Init()
 }

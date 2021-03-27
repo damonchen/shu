@@ -1,0 +1,36 @@
+package client
+
+import "github.com/damonchen/shu"
+
+//go:generate shugen definition.go -o client.go
+
+var (
+    // do not change the below code
+	bundle = shu.NewBundle()
+)
+
+///
+/// define your api request param and response body structs
+///
+
+
+func init() {
+	bundle.Client(shu.Client{
+		// Name: "auth",        // client name, must unique in client
+		// APIs: []*shu.API{
+		// 	{
+		// 		Name:     "login",      // client function name, must unique in client
+		// 		Path:     "/api/v1/login",      // really api path, support ${var}, which will be replace by params defintion
+		// 		Method:   shu.POST,     // api method will be used
+		// 		Params:   UserLogin{},      // request param, should given struct instance
+		// 		Response: UserLoginResp{},  // response body, should given struct instance
+		// 	},
+		// },
+	},
+	)
+	bundle.Init()
+}
+
+func GetBundle() *shu.Bundle {
+	return bundle
+}
